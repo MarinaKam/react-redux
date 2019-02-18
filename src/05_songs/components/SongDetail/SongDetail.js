@@ -1,10 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const SongDetail = () => (
-    <li>
-        <h3>Hi</h3>
-        <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-    </li>
-);
+const SongDetail = ( { song, showSong } ) => {
+    return (
+        <div className='col-12 col-md-6'>
+            <h3><small className="text-muted">Title: </small>{song ? song.title : showSong.title}</h3>
+            <p><small className="text-muted">Duration: </small> { song ? song.duration : showSong.duration}</p>
+        </div>
+    );
+};
 
-export default SongDetail;
+const mapStateToProps = (state) => ({song: state.selectedSong, showSong: state.songs[0]});
+
+export default connect(mapStateToProps)(SongDetail);
